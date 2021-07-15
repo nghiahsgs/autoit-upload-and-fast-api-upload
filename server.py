@@ -6,8 +6,18 @@ import io
 import os
 import time
 import shutil
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def _save_file_to_server(img, path="./public"):
     main_file_name = os.path.splitext(img.filename)[0]
